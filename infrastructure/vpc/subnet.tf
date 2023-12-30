@@ -1,17 +1,3 @@
-provider "aws" {
-  region = "ap-northeast-1"
-}
-
-resource "aws_vpc" "vpc" {
-  cidr_block           = "10.0.0.0/16"
-  enable_dns_hostnames = true
-  enable_dns_support   = true
-
-  tags = {
-    "Name" = "imported-vpc"
-  }
-}
-
 resource "aws_subnet" "public-1a" {
   vpc_id            = aws_vpc.vpc.id
   cidr_block        = "10.0.0.0/24"
@@ -45,13 +31,5 @@ resource "aws_subnet" "private-1c" {
   availability_zone = "ap-northeast-1c"
   tags = {
     "Name" = "private-1c"
-  }
-}
-
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.vpc.id
-
-  tags = {
-    Name = "igw"
   }
 }
